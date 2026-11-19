@@ -1,7 +1,10 @@
 {
   "name": "SUS CONECT - Saúde Digital & Teleconsultas",
   "description": "Aplicação web de orientação, teleconsultas e agendamento de saúde pública do projeto acadêmico Formação Geração Tech 4.0 com a assistente virtual SUS ANA e 90 profissionais.",
-  "requestFramePermissions": [],
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
   ]

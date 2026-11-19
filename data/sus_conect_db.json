@@ -1,0 +1,1988 @@
+{
+  "users": [
+    {
+      "id": "user_citizen_demo",
+      "name": "Maria Silva",
+      "email": "maria.silva@exemplo.com",
+      "phone": "(11) 98765-4321",
+      "role": "citizen",
+      "passwordHash": "senha123",
+      "createdAt": "2026-10-10T10:00:00.000Z"
+    },
+    {
+      "id": "user_admin_demo",
+      "name": "Coord. Dr. Roberto Sales",
+      "email": "admin@susconect.gov.br",
+      "phone": "(11) 91234-5678",
+      "role": "admin",
+      "passwordHash": "admin123",
+      "createdAt": "2026-09-01T08:00:00.000Z"
+    },
+    {
+      "id": "usr_mw9ghbl5et2i",
+      "name": "Carlos Eduardo Oliveira Santos",
+      "email": "paciente.teste.1794240522468@exemplo.com",
+      "phone": "(11) 97654-3210",
+      "role": "citizen",
+      "passwordHash": "minhaSenhaForte2026",
+      "cpf": "529.982.247-25",
+      "susCard": "700 1234 5678 9012",
+      "cep": "01310-100",
+      "street": "Avenida Paulista",
+      "number": "1578",
+      "complement": "Apto 101",
+      "neighborhood": "Bela Vista",
+      "city": "São Paulo",
+      "state": "SP",
+      "createdAt": "2026-11-09T16:08:42.473Z"
+    }
+  ],
+  "specialties": [
+    {
+      "id": "spec_clinica_geral",
+      "name": "Clínica Geral",
+      "slug": "clinica-geral",
+      "description": "Acolhimento primário, avaliação de sintomas comuns, acompanhamento preventivo e orientações de saúde.",
+      "iconName": "Stethoscope",
+      "professionalCount": 10,
+      "category": "médica"
+    },
+    {
+      "id": "spec_cardiologia",
+      "name": "Cardiologia",
+      "slug": "cardiologia",
+      "description": "Orientação preventiva para saúde cardiovascular, monitoramento de pressão arterial e cuidados com o coração.",
+      "iconName": "HeartPulse",
+      "professionalCount": 10,
+      "category": "médica"
+    },
+    {
+      "id": "spec_ortopedia",
+      "name": "Ortopedia",
+      "slug": "ortopedia",
+      "description": "Orientação para dores articulares, musculares, postura corporal e cuidados pós-trauma.",
+      "iconName": "Bone",
+      "professionalCount": 8,
+      "category": "médica"
+    },
+    {
+      "id": "spec_oftalmologia",
+      "name": "Oftalmologia",
+      "slug": "oftalmologia",
+      "description": "Orientação sobre fadiga visual, cuidados com os olhos, higiene ocular e triagem de queixas visuais.",
+      "iconName": "Eye",
+      "professionalCount": 8,
+      "category": "médica"
+    },
+    {
+      "id": "spec_dermatologia",
+      "name": "Dermatologia",
+      "slug": "dermatologia",
+      "description": "Avaliação inicial de manchas, lesões superficiais de pele, cuidados com hidratação e proteção solar.",
+      "iconName": "Sparkles",
+      "professionalCount": 8,
+      "category": "médica"
+    },
+    {
+      "id": "spec_ginecologia",
+      "name": "Ginecologia",
+      "slug": "ginecologia",
+      "description": "Saúde integral da mulher, planejamento reprodutivo, orientações preventivas e ciclos vitais.",
+      "iconName": "Activity",
+      "professionalCount": 8,
+      "category": "médica"
+    },
+    {
+      "id": "spec_endocrinologia",
+      "name": "Endocrinologia",
+      "slug": "endocrinologia",
+      "description": "Acompanhamento metabólico, orientações sobre diabetes, tireoide e hábitos de vida saudáveis.",
+      "iconName": "Scale",
+      "professionalCount": 7,
+      "category": "médica"
+    },
+    {
+      "id": "spec_neurologia",
+      "name": "Neurologia",
+      "slug": "neurologia",
+      "description": "Orientações para queixas de enxaqueca, memória, distúrbios do sono e acompanhamento neurológico.",
+      "iconName": "Brain",
+      "professionalCount": 7,
+      "category": "médica"
+    },
+    {
+      "id": "spec_otorrinolaringologia",
+      "name": "Otorrinolaringologia",
+      "slug": "otorrinolaringologia",
+      "description": "Cuidados para queixas de ouvido, nariz, garganta, sinusites e equilíbrio.",
+      "iconName": "Ear",
+      "professionalCount": 7,
+      "category": "médica"
+    },
+    {
+      "id": "spec_urologia",
+      "name": "Urologia",
+      "slug": "urologia",
+      "description": "Saúde do aparelho urinário masculino e feminino, orientações preventivas da próstata.",
+      "iconName": "ShieldCheck",
+      "professionalCount": 7,
+      "category": "médica"
+    },
+    {
+      "id": "spec_gastroenterologia",
+      "name": "Gastroenterologia",
+      "slug": "gastroenterologia",
+      "description": "Orientações para refluxo, gastrite, desconforto intestinal e cuidados com a digestão.",
+      "iconName": "Layers",
+      "professionalCount": 7,
+      "category": "médica"
+    },
+    {
+      "id": "spec_psicologia",
+      "name": "Psicologia",
+      "slug": "psicologia",
+      "description": "Área de atendimento profissional em saúde mental, apoio emocional, acolhimento de ansiedade e escuta qualificada.",
+      "iconName": "Smile",
+      "professionalCount": 8,
+      "category": "atendimento_profissional"
+    }
+  ],
+  "professionals": [
+    {
+      "id": "prof_cg_1",
+      "name": "Dra. Helena Martins",
+      "specialtyId": "spec_clinica_geral",
+      "specialtyName": "Clínica Geral",
+      "availableDays": [
+        "Segunda",
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Atendimento clínico primário, prevenção e acolhimento longitudinal."
+    },
+    {
+      "id": "prof_cg_2",
+      "name": "Dr. Rafael Monteiro",
+      "specialtyId": "spec_clinica_geral",
+      "specialtyName": "Clínica Geral",
+      "availableDays": [
+        "Terça",
+        "Quinta",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Avaliação de queixas agudas, sintomas gripais e orientações gerais."
+    },
+    {
+      "id": "prof_cg_3",
+      "name": "Dra. Camila Albuquerque",
+      "specialtyId": "spec_clinica_geral",
+      "specialtyName": "Clínica Geral",
+      "availableDays": [
+        "Segunda",
+        "Terça",
+        "Quarta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Medicina preventiva e promoção de hábitos de vida sustentáveis."
+    },
+    {
+      "id": "prof_cg_4",
+      "name": "Dr. Felipe Nogueira",
+      "specialtyId": "spec_clinica_geral",
+      "specialtyName": "Clínica Geral",
+      "availableDays": [
+        "Quarta",
+        "Quinta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Triagem clínica, acolhimento rápido e acompanhamento terapêutico."
+    },
+    {
+      "id": "prof_cg_5",
+      "name": "Dra. Mariana Vasconcelos",
+      "specialtyId": "spec_clinica_geral",
+      "specialtyName": "Clínica Geral",
+      "availableDays": [
+        "Segunda",
+        "Quinta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Atenção primária, orientação sobre exames básicos e suporte familiar."
+    },
+    {
+      "id": "prof_cg_6",
+      "name": "Dr. Gustavo Almeida",
+      "specialtyId": "spec_clinica_geral",
+      "specialtyName": "Clínica Geral",
+      "availableDays": [
+        "Terça",
+        "Sexta",
+        "Sábado"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Atendimento humanizado para adultos e idosos com foco em bem-estar."
+    },
+    {
+      "id": "prof_cg_7",
+      "name": "Dra. Beatriz Carvalho",
+      "specialtyId": "spec_clinica_geral",
+      "specialtyName": "Clínica Geral",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Avaliação clínica integrada e orientações de autocuidado contínuo."
+    },
+    {
+      "id": "prof_cg_8",
+      "name": "Dr. Eduardo Menezes",
+      "specialtyId": "spec_clinica_geral",
+      "specialtyName": "Clínica Geral",
+      "availableDays": [
+        "Terça",
+        "Quarta",
+        "Quinta"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Prevenção de doenças crônicas e educação comunitária em saúde."
+    },
+    {
+      "id": "prof_cg_9",
+      "name": "Dra. Juliana Ribeiro",
+      "specialtyId": "spec_clinica_geral",
+      "specialtyName": "Clínica Geral",
+      "availableDays": [
+        "Quinta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Acolhimento inicial e direcionamento terapêutico na atenção básica."
+    },
+    {
+      "id": "prof_cg_10",
+      "name": "Dr. André Fernandes",
+      "specialtyId": "spec_clinica_geral",
+      "specialtyName": "Clínica Geral",
+      "availableDays": [
+        "Segunda",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Teleorientação clínica e acompanhamento de sintomas ambulatoriais."
+    },
+    {
+      "id": "prof_cardio_1",
+      "name": "Dr. Marcelo Azevedo",
+      "specialtyId": "spec_cardiologia",
+      "specialtyName": "Cardiologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Avaliação de risco cardiovascular e monitoramento de hipertensão arterial."
+    },
+    {
+      "id": "prof_cardio_2",
+      "name": "Dra. Patrícia Moreira",
+      "specialtyId": "spec_cardiologia",
+      "specialtyName": "Cardiologia",
+      "availableDays": [
+        "Terça",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Orientação cardiológica preventiva e estilo de vida saudável."
+    },
+    {
+      "id": "prof_cardio_3",
+      "name": "Dr. Ricardo Tavares",
+      "specialtyId": "spec_cardiologia",
+      "specialtyName": "Cardiologia",
+      "availableDays": [
+        "Segunda",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Acompanhamento preventivo de arritmias e orientação após exames."
+    },
+    {
+      "id": "prof_cardio_4",
+      "name": "Dra. Fernanda Cavalcante",
+      "specialtyId": "spec_cardiologia",
+      "specialtyName": "Cardiologia",
+      "availableDays": [
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Saúde do coração, controle de dislipidemias e teleorientação."
+    },
+    {
+      "id": "prof_cardio_5",
+      "name": "Dr. Bruno Siqueira",
+      "specialtyId": "spec_cardiologia",
+      "specialtyName": "Cardiologia",
+      "availableDays": [
+        "Terça",
+        "Quarta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Check-up cardiológico preventivo e triagem de sintomas precordiais."
+    },
+    {
+      "id": "prof_cardio_6",
+      "name": "Dra. Daniela Freitas",
+      "specialtyId": "spec_cardiologia",
+      "specialtyName": "Cardiologia",
+      "availableDays": [
+        "Segunda",
+        "Quinta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Cardiologia clínica ambulatorial e suporte a pacientes hipertensos."
+    },
+    {
+      "id": "prof_cardio_7",
+      "name": "Dr. Leonardo Barros",
+      "specialtyId": "spec_cardiologia",
+      "specialtyName": "Cardiologia",
+      "availableDays": [
+        "Terça",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Orientação sobre atividade física segura e saúde cardiovascular."
+    },
+    {
+      "id": "prof_cardio_8",
+      "name": "Dra. Renata Campos",
+      "specialtyId": "spec_cardiologia",
+      "specialtyName": "Cardiologia",
+      "availableDays": [
+        "Quarta",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Prevenção de infarto e acompanhamento ambulatorial de rotina."
+    },
+    {
+      "id": "prof_cardio_9",
+      "name": "Dr. Vinícius Duarte",
+      "specialtyId": "spec_cardiologia",
+      "specialtyName": "Cardiologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Telemedicina cardiológica e esclarecimento de laudos de eletrocardiograma."
+    },
+    {
+      "id": "prof_cardio_10",
+      "name": "Dra. Carolina Mendes",
+      "specialtyId": "spec_cardiologia",
+      "specialtyName": "Cardiologia",
+      "availableDays": [
+        "Terça",
+        "Quinta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Acompanhamento longitudinal de pacientes com fatores de risco cardíaco."
+    },
+    {
+      "id": "prof_orto_1",
+      "name": "Dr. Thiago Vasquez",
+      "specialtyId": "spec_ortopedia",
+      "specialtyName": "Ortopedia",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Cuidados com a coluna vertebral, postura e alívio de lombalgia."
+    },
+    {
+      "id": "prof_orto_2",
+      "name": "Dra. Larissa Peixoto",
+      "specialtyId": "spec_ortopedia",
+      "specialtyName": "Ortopedia",
+      "availableDays": [
+        "Terça",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Orientação de dores em joelhos, articulações e recuperação motora."
+    },
+    {
+      "id": "prof_orto_3",
+      "name": "Dr. Márcio Prado",
+      "specialtyId": "spec_ortopedia",
+      "specialtyName": "Ortopedia",
+      "availableDays": [
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Orientações pós-entorse, reabilitação física e ergonomia no trabalho."
+    },
+    {
+      "id": "prof_orto_4",
+      "name": "Dra. Tatiana Bueno",
+      "specialtyId": "spec_ortopedia",
+      "specialtyName": "Ortopedia",
+      "availableDays": [
+        "Segunda",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Saúde dos ombros, cotovelos e prevenção de tendinopatias."
+    },
+    {
+      "id": "prof_orto_5",
+      "name": "Dr. Alexandre Gouveia",
+      "specialtyId": "spec_ortopedia",
+      "specialtyName": "Ortopedia",
+      "availableDays": [
+        "Terça",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Ortopedia preventiva e orientação para prática de esportes."
+    },
+    {
+      "id": "prof_orto_6",
+      "name": "Dra. Sabrina Lins",
+      "specialtyId": "spec_ortopedia",
+      "specialtyName": "Ortopedia",
+      "availableDays": [
+        "Quinta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Acompanhamento de artrose, osteoporose e fortalecimento musculoesquelético."
+    },
+    {
+      "id": "prof_orto_7",
+      "name": "Dr. Renato Figueiredo",
+      "specialtyId": "spec_ortopedia",
+      "specialtyName": "Ortopedia",
+      "availableDays": [
+        "Segunda",
+        "Terça"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Cuidados ortopédicos na terceira idade e prevenção de quedas."
+    },
+    {
+      "id": "prof_orto_8",
+      "name": "Dra. Bianca Parente",
+      "specialtyId": "spec_ortopedia",
+      "specialtyName": "Ortopedia",
+      "availableDays": [
+        "Quarta",
+        "Quinta"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Teleorientação para dores crônicas e direcionamento fisioterapêutico."
+    },
+    {
+      "id": "prof_oftalmo_1",
+      "name": "Dr. Murilo Antunes",
+      "specialtyId": "spec_oftalmologia",
+      "specialtyName": "Oftalmologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Orientação sobre cansaço visual por telas e higiene das pálpebras."
+    },
+    {
+      "id": "prof_oftalmo_2",
+      "name": "Dra. Vanessa Meireles",
+      "specialtyId": "spec_oftalmologia",
+      "specialtyName": "Oftalmologia",
+      "availableDays": [
+        "Terça",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Esclarecimento de sintomas de olho seco e alergias oculares."
+    },
+    {
+      "id": "prof_oftalmo_3",
+      "name": "Dr. Caio Fontes",
+      "specialtyId": "spec_oftalmologia",
+      "specialtyName": "Oftalmologia",
+      "availableDays": [
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Prevenção de glaucoma e acompanhamento da saúde ocular na diabetes."
+    },
+    {
+      "id": "prof_oftalmo_4",
+      "name": "Dra. Luiza Valente",
+      "specialtyId": "spec_oftalmologia",
+      "specialtyName": "Oftalmologia",
+      "availableDays": [
+        "Segunda",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Orientações para uso adequado de colírios e cuidados visuais escolares."
+    },
+    {
+      "id": "prof_oftalmo_5",
+      "name": "Dr. Danilo Chaves",
+      "specialtyId": "spec_oftalmologia",
+      "specialtyName": "Oftalmologia",
+      "availableDays": [
+        "Terça",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Triagem e orientação inicial de queixas visuais ambulatoriais."
+    },
+    {
+      "id": "prof_oftalmo_6",
+      "name": "Dra. Isabela Saraiva",
+      "specialtyId": "spec_oftalmologia",
+      "specialtyName": "Oftalmologia",
+      "availableDays": [
+        "Quarta",
+        "Quinta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Cuidados com a visão infantil e esclarecimento sobre miopia."
+    },
+    {
+      "id": "prof_oftalmo_7",
+      "name": "Dr. Lucas Silveira",
+      "specialtyId": "spec_oftalmologia",
+      "specialtyName": "Oftalmologia",
+      "availableDays": [
+        "Segunda",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Avaliação de irritações oculares e prevenção de conjuntivite."
+    },
+    {
+      "id": "prof_oftalmo_8",
+      "name": "Dra. Gabriela Sales",
+      "specialtyId": "spec_oftalmologia",
+      "specialtyName": "Oftalmologia",
+      "availableDays": [
+        "Terça",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Saúde ocular integrada e suporte a pacientes com queixas refrativas."
+    },
+    {
+      "id": "prof_dermato_1",
+      "name": "Dra. Clarice Braga",
+      "specialtyId": "spec_dermatologia",
+      "specialtyName": "Dermatologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Orientação sobre lesões inflamatórias da pele, dermatites e acne."
+    },
+    {
+      "id": "prof_dermato_2",
+      "name": "Dr. Rodrigo Fagundes",
+      "specialtyId": "spec_dermatologia",
+      "specialtyName": "Dermatologia",
+      "availableDays": [
+        "Terça",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Fotoproteção, prevenção do câncer de pele e cuidados pós-sol."
+    },
+    {
+      "id": "prof_dermato_3",
+      "name": "Dra. Alice Quintana",
+      "specialtyId": "spec_dermatologia",
+      "specialtyName": "Dermatologia",
+      "availableDays": [
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Cuidados com cabelos, unhas e pele sensível."
+    },
+    {
+      "id": "prof_dermato_4",
+      "name": "Dr. Otávio Ramos",
+      "specialtyId": "spec_dermatologia",
+      "specialtyName": "Dermatologia",
+      "availableDays": [
+        "Segunda",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Avaliação inicial de prurido cutâneo e infecções dermatológicas simples."
+    },
+    {
+      "id": "prof_dermato_5",
+      "name": "Dra. Priscila Viana",
+      "specialtyId": "spec_dermatologia",
+      "specialtyName": "Dermatologia",
+      "availableDays": [
+        "Terça",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Acompanhamento preventivo de alergias na pele e eczemas."
+    },
+    {
+      "id": "prof_dermato_6",
+      "name": "Dr. Wesley Miranda",
+      "specialtyId": "spec_dermatologia",
+      "specialtyName": "Dermatologia",
+      "availableDays": [
+        "Quarta",
+        "Quinta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Orientação de hidratação cutânea na terceira idade e cicatrizes."
+    },
+    {
+      "id": "prof_dermato_7",
+      "name": "Dra. Marina Furtado",
+      "specialtyId": "spec_dermatologia",
+      "specialtyName": "Dermatologia",
+      "availableDays": [
+        "Segunda",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Dermatologia ambulatorial básica e higiene de anexos cutâneos."
+    },
+    {
+      "id": "prof_dermato_8",
+      "name": "Dr. Gilberto Gusmão",
+      "specialtyId": "spec_dermatologia",
+      "specialtyName": "Dermatologia",
+      "availableDays": [
+        "Terça",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Orientação contra micoses, cuidados nos pés e unhas."
+    },
+    {
+      "id": "prof_gineco_1",
+      "name": "Dra. Letícia Brandão",
+      "specialtyId": "spec_ginecologia",
+      "specialtyName": "Ginecologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Saúde integral da mulher, exames preventivos e climatério."
+    },
+    {
+      "id": "prof_gineco_2",
+      "name": "Dr. Samuel Rocha",
+      "specialtyId": "spec_ginecologia",
+      "specialtyName": "Ginecologia",
+      "availableDays": [
+        "Terça",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Planejamento reprodutivo, contracepção e esclarecimento de dúvidas."
+    },
+    {
+      "id": "prof_gineco_3",
+      "name": "Dra. Débora Mattos",
+      "specialtyId": "spec_ginecologia",
+      "specialtyName": "Ginecologia",
+      "availableDays": [
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Acompanhamento do ciclo menstrual e orientação para endometriose."
+    },
+    {
+      "id": "prof_gineco_4",
+      "name": "Dr. Fábio Cunha",
+      "specialtyId": "spec_ginecologia",
+      "specialtyName": "Ginecologia",
+      "availableDays": [
+        "Segunda",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Orientação preventiva pré-concepcional e cuidados na gravidez inicial."
+    },
+    {
+      "id": "prof_gineco_5",
+      "name": "Dra. Raquel Toledo",
+      "specialtyId": "spec_ginecologia",
+      "specialtyName": "Ginecologia",
+      "availableDays": [
+        "Terça",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Acolhimento humanizado e esclarecimento sobre saúde da mama."
+    },
+    {
+      "id": "prof_gineco_6",
+      "name": "Dr. Heitor Dornelles",
+      "specialtyId": "spec_ginecologia",
+      "specialtyName": "Ginecologia",
+      "availableDays": [
+        "Quinta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Prevenção de infecções ginecológicas e orientações de higiene íntima."
+    },
+    {
+      "id": "prof_gineco_7",
+      "name": "Dra. Sofia Mendonça",
+      "specialtyId": "spec_ginecologia",
+      "specialtyName": "Ginecologia",
+      "availableDays": [
+        "Segunda",
+        "Terça"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Atenção à saúde da mulher jovem e educação em saúde sexual."
+    },
+    {
+      "id": "prof_gineco_8",
+      "name": "Dra. Simone Abreu",
+      "specialtyId": "spec_ginecologia",
+      "specialtyName": "Ginecologia",
+      "availableDays": [
+        "Quarta",
+        "Quinta"
+      ],
+      "shifts": [
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Teleorientação para sintomas da menopausa e qualidade de vida."
+    },
+    {
+      "id": "prof_endocrino_1",
+      "name": "Dra. Cecília Queiroz",
+      "specialtyId": "spec_endocrinologia",
+      "specialtyName": "Endocrinologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Manejo e controle de diabetes mellitus, glicemia e rotinas alimentares."
+    },
+    {
+      "id": "prof_endocrino_2",
+      "name": "Dr. Valter Silveira",
+      "specialtyId": "spec_endocrinologia",
+      "specialtyName": "Endocrinologia",
+      "availableDays": [
+        "Terça",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Acompanhamento de hipotireoidismo, hipertireoidismo e nódulos."
+    },
+    {
+      "id": "prof_endocrino_3",
+      "name": "Dra. Lorena Castilho",
+      "specialtyId": "spec_endocrinologia",
+      "specialtyName": "Endocrinologia",
+      "availableDays": [
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Metabolismo, controle de peso e orientações de prevenção de obesidade."
+    },
+    {
+      "id": "prof_endocrino_4",
+      "name": "Dr. Danilo Paiva",
+      "specialtyId": "spec_endocrinologia",
+      "specialtyName": "Endocrinologia",
+      "availableDays": [
+        "Segunda",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Esclarecimento de exames hormonais e hábitos de vida preventivos."
+    },
+    {
+      "id": "prof_endocrino_5",
+      "name": "Dra. Taís Bernardes",
+      "specialtyId": "spec_endocrinologia",
+      "specialtyName": "Endocrinologia",
+      "availableDays": [
+        "Terça",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Saúde óssea, osteopenia e suplementação orientada de vitamina D."
+    },
+    {
+      "id": "prof_endocrino_6",
+      "name": "Dr. Murilo Correia",
+      "specialtyId": "spec_endocrinologia",
+      "specialtyName": "Endocrinologia",
+      "availableDays": [
+        "Quinta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Manejo de síndrome metabólica e orientação multidisciplinar."
+    },
+    {
+      "id": "prof_endocrino_7",
+      "name": "Dra. Viviane Teles",
+      "specialtyId": "spec_endocrinologia",
+      "specialtyName": "Endocrinologia",
+      "availableDays": [
+        "Segunda",
+        "Terça"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Endocrinologia clínica com ênfase em autocuidado contínuo."
+    },
+    {
+      "id": "prof_neuro_1",
+      "name": "Dr. Henrique Valadares",
+      "specialtyId": "spec_neurologia",
+      "specialtyName": "Neurologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Investigação e alívio de cefaleias tensionais e enxaqueca crônica."
+    },
+    {
+      "id": "prof_neuro_2",
+      "name": "Dra. Elisa Couto",
+      "specialtyId": "spec_neurologia",
+      "specialtyName": "Neurologia",
+      "availableDays": [
+        "Terça",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Acompanhamento de queixas de memória e cognição na melhor idade."
+    },
+    {
+      "id": "prof_neuro_3",
+      "name": "Dr. Sérgio Portela",
+      "specialtyId": "spec_neurologia",
+      "specialtyName": "Neurologia",
+      "availableDays": [
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Orientação sobre distúrbios do sono, insônia e higiene do sono."
+    },
+    {
+      "id": "prof_neuro_4",
+      "name": "Dra. Natália Esteves",
+      "specialtyId": "spec_neurologia",
+      "specialtyName": "Neurologia",
+      "availableDays": [
+        "Segunda",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Teleorientação para tremores, dormências e sintomas vestibulares."
+    },
+    {
+      "id": "prof_neuro_5",
+      "name": "Dr. Leandro Maciel",
+      "specialtyId": "spec_neurologia",
+      "specialtyName": "Neurologia",
+      "availableDays": [
+        "Terça",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Esclarecimento de laudos de eletroencefalograma e ressonância."
+    },
+    {
+      "id": "prof_neuro_6",
+      "name": "Dra. Amanda Guimarães",
+      "specialtyId": "spec_neurologia",
+      "specialtyName": "Neurologia",
+      "availableDays": [
+        "Quarta",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Acompanhamento preventivo de neuropatias periféricas e formigamentos."
+    },
+    {
+      "id": "prof_neuro_7",
+      "name": "Dr. Cristiano Bastos",
+      "specialtyId": "spec_neurologia",
+      "specialtyName": "Neurologia",
+      "availableDays": [
+        "Quinta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Neurologia ambulatorial e esclarecimento sobre prevenção do AVC."
+    },
+    {
+      "id": "prof_otorrino_1",
+      "name": "Dr. Paulo Rogério",
+      "specialtyId": "spec_otorrinolaringologia",
+      "specialtyName": "Otorrinolaringologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Manejo de rinite alérgica, sinusites e desvio septal."
+    },
+    {
+      "id": "prof_otorrino_2",
+      "name": "Dra. Fabiana Antunes",
+      "specialtyId": "spec_otorrinolaringologia",
+      "specialtyName": "Otorrinolaringologia",
+      "availableDays": [
+        "Terça",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Queixas de zumbido no ouvido, tontura e cuidados auditivos."
+    },
+    {
+      "id": "prof_otorrino_3",
+      "name": "Dr. Rogério Moura",
+      "specialtyId": "spec_otorrinolaringologia",
+      "specialtyName": "Otorrinolaringologia",
+      "availableDays": [
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Dor de garganta de repetição, rouquidão e higiene vocal."
+    },
+    {
+      "id": "prof_otorrino_4",
+      "name": "Dra. Mônica Fontenele",
+      "specialtyId": "spec_otorrinolaringologia",
+      "specialtyName": "Otorrinolaringologia",
+      "availableDays": [
+        "Segunda",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Orientações contra otites externas e cuidados pós-banho de mar/piscina."
+    },
+    {
+      "id": "prof_otorrino_5",
+      "name": "Dr. Cláudio Peçanha",
+      "specialtyId": "spec_otorrinolaringologia",
+      "specialtyName": "Otorrinolaringologia",
+      "availableDays": [
+        "Terça",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Ronco, apneia do sono e desobstrução das vias aéreas superiores."
+    },
+    {
+      "id": "prof_otorrino_6",
+      "name": "Dra. Gabriela Vasconcelos",
+      "specialtyId": "spec_otorrinolaringologia",
+      "specialtyName": "Otorrinolaringologia",
+      "availableDays": [
+        "Quinta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Atenção às vias aéreas infantis e orientações de lavagem nasal."
+    },
+    {
+      "id": "prof_otorrino_7",
+      "name": "Dr. Yuri Fagundes",
+      "specialtyId": "spec_otorrinolaringologia",
+      "specialtyName": "Otorrinolaringologia",
+      "availableDays": [
+        "Segunda",
+        "Terça"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Teleorientação para sintomas alérgicos respiratórios sazonais."
+    },
+    {
+      "id": "prof_uro_1",
+      "name": "Dr. Wagner Calheiros",
+      "specialtyId": "spec_urologia",
+      "specialtyName": "Urologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Prevenção urológica masculina, saúde da próstata e exames de rotina."
+    },
+    {
+      "id": "prof_uro_2",
+      "name": "Dr. Álvaro Pimentel",
+      "specialtyId": "spec_urologia",
+      "specialtyName": "Urologia",
+      "availableDays": [
+        "Terça",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Prevenção e manejo de cálculos renais (pedras nos rins) e hidratação."
+    },
+    {
+      "id": "prof_uro_3",
+      "name": "Dra. Cristina Del Valle",
+      "specialtyId": "spec_urologia",
+      "specialtyName": "Urologia",
+      "availableDays": [
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Infecções do trato urinário femininas e masculinas e saúde vesical."
+    },
+    {
+      "id": "prof_uro_4",
+      "name": "Dr. Jorge Aragão",
+      "specialtyId": "spec_urologia",
+      "specialtyName": "Urologia",
+      "availableDays": [
+        "Segunda",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Orientação preventiva sobre incontinência urinária e fortalecimento pélvico."
+    },
+    {
+      "id": "prof_uro_5",
+      "name": "Dr. Rodrigo Sanches",
+      "specialtyId": "spec_urologia",
+      "specialtyName": "Urologia",
+      "availableDays": [
+        "Terça",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Acompanhamento do homem maduro e esclarecimento de PSA."
+    },
+    {
+      "id": "prof_uro_6",
+      "name": "Dr. Bernardo Castelo",
+      "specialtyId": "spec_urologia",
+      "specialtyName": "Urologia",
+      "availableDays": [
+        "Quinta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Teleorientação para sintomas miccionais e hábitos protetores renais."
+    },
+    {
+      "id": "prof_uro_7",
+      "name": "Dra. Paola Vianna",
+      "specialtyId": "spec_urologia",
+      "specialtyName": "Urologia",
+      "availableDays": [
+        "Segunda",
+        "Terça"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Urologia geral com abordagem humanizada e acolhimento preventivo."
+    },
+    {
+      "id": "prof_gastro_1",
+      "name": "Dr. Tiago Salgado",
+      "specialtyId": "spec_gastroenterologia",
+      "specialtyName": "Gastroenterologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Orientação sobre refluxo gastroesofágico, queimação e gastrite."
+    },
+    {
+      "id": "prof_gastro_2",
+      "name": "Dra. Regina Morais",
+      "specialtyId": "spec_gastroenterologia",
+      "specialtyName": "Gastroenterologia",
+      "availableDays": [
+        "Terça",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Síndrome do intestino irritável, intolerâncias alimentares e digestão."
+    },
+    {
+      "id": "prof_gastro_3",
+      "name": "Dr. Vicente Queiroz",
+      "specialtyId": "spec_gastroenterologia",
+      "specialtyName": "Gastroenterologia",
+      "availableDays": [
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Prevenção de doenças hepáticas, gordura no fígado (esteatose) e dieta."
+    },
+    {
+      "id": "prof_gastro_4",
+      "name": "Dra. Tatiana Meira",
+      "specialtyId": "spec_gastroenterologia",
+      "specialtyName": "Gastroenterologia",
+      "availableDays": [
+        "Segunda",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Acompanhamento de queixas de distensão abdominal e constipação crônica."
+    },
+    {
+      "id": "prof_gastro_5",
+      "name": "Dr. Daniel Padilha",
+      "specialtyId": "spec_gastroenterologia",
+      "specialtyName": "Gastroenterologia",
+      "availableDays": [
+        "Terça",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Esclarecimento de exames de endoscopia e colonoscopia preventiva."
+    },
+    {
+      "id": "prof_gastro_6",
+      "name": "Dra. Juliana Aguiar",
+      "specialtyId": "spec_gastroenterologia",
+      "specialtyName": "Gastroenterologia",
+      "availableDays": [
+        "Quinta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Atenção aos distúrbios funcionais gastrointestinais e nutrição."
+    },
+    {
+      "id": "prof_gastro_7",
+      "name": "Dr. Arthur Vasconcellos",
+      "specialtyId": "spec_gastroenterologia",
+      "specialtyName": "Gastroenterologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Gastroenterologia ambulatorial e suporte na rotina de alimentação."
+    },
+    {
+      "id": "prof_psico_1",
+      "name": "Psic. Amanda Lima",
+      "specialtyId": "spec_psicologia",
+      "specialtyName": "Psicologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Acolhimento de ansiedade, estresse contemporâneo e técnicas de regulação emocional."
+    },
+    {
+      "id": "prof_psico_2",
+      "name": "Psic. Carlos Eduardo Siqueira",
+      "specialtyId": "spec_psicologia",
+      "specialtyName": "Psicologia",
+      "availableDays": [
+        "Terça",
+        "Quinta",
+        "Sábado"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Escuta qualificada, apoio em momentos de luto, transições de vida e vínculos."
+    },
+    {
+      "id": "prof_psico_3",
+      "name": "Psic. Luciana Marinho",
+      "specialtyId": "spec_psicologia",
+      "specialtyName": "Psicologia",
+      "availableDays": [
+        "Segunda",
+        "Terça",
+        "Quinta"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Psicologia preventiva, bem-estar psicológico e manejo do burnout."
+    },
+    {
+      "id": "prof_psico_4",
+      "name": "Psic. Daniel Borges",
+      "specialtyId": "spec_psicologia",
+      "specialtyName": "Psicologia",
+      "availableDays": [
+        "Quarta",
+        "Sexta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Apoio em autoestima, relacionamentos interpessoais e desenvolvimento pessoal."
+    },
+    {
+      "id": "prof_psico_5",
+      "name": "Psic. Fernanda Nogueira",
+      "specialtyId": "spec_psicologia",
+      "specialtyName": "Psicologia",
+      "availableDays": [
+        "Segunda",
+        "Quarta"
+      ],
+      "shifts": [
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Acolhimento humanizado para jovens e adultos com sobrecarga mental."
+    },
+    {
+      "id": "prof_psico_6",
+      "name": "Psic. Rodrigo Beltrão",
+      "specialtyId": "spec_psicologia",
+      "specialtyName": "Psicologia",
+      "availableDays": [
+        "Terça",
+        "Sexta"
+      ],
+      "shifts": [
+        "Manhã"
+      ],
+      "active": true,
+      "rating": 4.7,
+      "bioSummary": "Orientação psicológica breve e suporte para hábitos saudáveis de rotina."
+    },
+    {
+      "id": "prof_psico_7",
+      "name": "Psic. Mariana Esteves",
+      "specialtyId": "spec_psicologia",
+      "specialtyName": "Psicologia",
+      "availableDays": [
+        "Quinta",
+        "Sexta",
+        "Sábado"
+      ],
+      "shifts": [
+        "Manhã",
+        "Tarde"
+      ],
+      "active": true,
+      "rating": 4.9,
+      "bioSummary": "Acolhimento da saúde emocional da mulher, maternidade e resiliência."
+    },
+    {
+      "id": "prof_psico_8",
+      "name": "Psic. Thiago Medeiros",
+      "specialtyId": "spec_psicologia",
+      "specialtyName": "Psicologia",
+      "availableDays": [
+        "Segunda",
+        "Quinta"
+      ],
+      "shifts": [
+        "Tarde",
+        "Noite"
+      ],
+      "active": true,
+      "rating": 4.8,
+      "bioSummary": "Espaço de escuta empática e fortalecimento da saúde mental comunitária."
+    }
+  ],
+  "appointments": [
+    {
+      "id": "apt_mw5vcrfh26e2",
+      "citizenId": "user_citizen_demo",
+      "citizenName": "Maria Silva",
+      "citizenEmail": "maria.silva@exemplo.com",
+      "citizenPhone": "(11) 98765-4321",
+      "professionalId": "prof_cg_1",
+      "professionalName": "Dra. Helena Martins",
+      "specialtyId": "spec_clinica_geral",
+      "specialtyName": "Clínica Geral",
+      "date": "2026-11-07",
+      "time": "10:00",
+      "status": "concluido",
+      "reason": "Avaliação clínica",
+      "virtualRoomId": "sala-sus-clinica-geral-2502",
+      "createdAt": "2026-11-07T03:53:59.261Z",
+      "startedAt": "2026-11-07T03:54:02.471Z",
+      "videoSessionId": "session_mw5vctwn",
+      "clinicalExtensionMinutes": 5,
+      "clinicalExtensionReason": "Necessidade de acompanhamento dos sintomas",
+      "endedAt": "2026-11-07T03:54:10.881Z",
+      "effectiveDurationSeconds": 245,
+      "notes": "Teleconsulta concluída normalmente"
+    },
+    {
+      "id": "apt_demo_3",
+      "citizenId": "user_citizen_demo",
+      "citizenName": "Maria Silva",
+      "citizenEmail": "maria.silva@exemplo.com",
+      "citizenPhone": "(11) 98765-4321",
+      "professionalId": "prof_psico_1",
+      "professionalName": "Psic. Amanda Lima",
+      "specialtyId": "spec_psicologia",
+      "specialtyName": "Psicologia",
+      "date": "2026-10-30",
+      "time": "11:00",
+      "status": "concluido",
+      "reason": "Sessão de acolhimento de ansiedade e técnicas de respiração.",
+      "notes": "Atendimento finalizado com emissão de plano de cuidados domiciliares.",
+      "virtualRoomId": "sala-sus-psi-1490",
+      "createdAt": "2026-10-25T14:20:00.000Z"
+    },
+    {
+      "id": "apt_demo_5",
+      "citizenId": "user_outro_cidadao_2",
+      "citizenName": "Carla Beatriz Alencar",
+      "citizenEmail": "carla.alencar@exemplo.com",
+      "citizenPhone": "(31) 98834-1122",
+      "professionalId": "prof_dermato_1",
+      "professionalName": "Dra. Clarice Braga",
+      "specialtyId": "spec_dermatologia",
+      "specialtyName": "Dermatologia",
+      "date": "2026-11-09",
+      "time": "15:30",
+      "status": "solicitado",
+      "reason": "Dúvidas sobre manchas avermelhadas causadas por picadas ou alergia.",
+      "virtualRoomId": "sala-sus-derm-5541",
+      "createdAt": "2026-11-06T09:00:00.000Z"
+    },
+    {
+      "id": "apt_demo_4",
+      "citizenId": "user_outro_cidadao",
+      "citizenName": "João Pedro Santos",
+      "citizenEmail": "joao.pedro@exemplo.com",
+      "citizenPhone": "(21) 99123-4567",
+      "professionalId": "prof_orto_1",
+      "professionalName": "Dr. Thiago Vasquez",
+      "specialtyId": "spec_ortopedia",
+      "specialtyName": "Ortopedia",
+      "date": "2026-11-10",
+      "time": "10:00",
+      "status": "confirmado",
+      "reason": "Dor lombar após esforço físico no trabalho.",
+      "virtualRoomId": "sala-sus-orto-3321",
+      "createdAt": "2026-11-04T12:00:00.000Z"
+    },
+    {
+      "id": "apt_demo_1",
+      "citizenId": "user_citizen_demo",
+      "citizenName": "Maria Silva",
+      "citizenEmail": "maria.silva@exemplo.com",
+      "citizenPhone": "(11) 98765-4321",
+      "professionalId": "prof_cg_1",
+      "professionalName": "Dra. Helena Martins",
+      "specialtyId": "spec_clinica_geral",
+      "specialtyName": "Clínica Geral",
+      "date": "2026-11-12",
+      "time": "09:30",
+      "status": "confirmado",
+      "reason": "Acompanhamento preventivo de rotina e renovação de orientações de cuidados.",
+      "notes": "Paciente orientada a ter exames anteriores em mãos durante a chamada de vídeo.",
+      "virtualRoomId": "sala-sus-cg01-8842",
+      "createdAt": "2026-11-05T10:15:00.000Z"
+    },
+    {
+      "id": "apt_demo_2",
+      "citizenId": "user_citizen_demo",
+      "citizenName": "Maria Silva",
+      "citizenEmail": "maria.silva@exemplo.com",
+      "citizenPhone": "(11) 98765-4321",
+      "professionalId": "prof_cardio_1",
+      "professionalName": "Dr. Marcelo Azevedo",
+      "specialtyId": "spec_cardiologia",
+      "specialtyName": "Cardiologia",
+      "date": "2026-11-18",
+      "time": "14:00",
+      "status": "solicitado",
+      "reason": "Orientação preventiva sobre controle de pressão arterial e hábitos saudáveis.",
+      "virtualRoomId": "sala-sus-cardio-9102",
+      "createdAt": "2026-11-06T08:30:00.000Z"
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc_1",
+      "citizenId": "user_citizen_demo",
+      "citizenName": "Maria Silva",
+      "title": "Receita Digital Demonstrativa",
+      "type": "receita",
+      "issuedDate": "2026-11-04",
+      "doctorName": "Dra. Helena Martins",
+      "specialty": "Clínica Geral",
+      "documentNumber": "REC-SUS-2026-0892",
+      "content": {
+        "diagnosisOrSubject": "Sintomas gripais leves e cefaleia tensional",
+        "items": [
+          "1. Dipirona Sódica 500mg — Tomar 1 comprimido via oral a cada 6 horas se houver dor ou febre (máx. 4 ao dia)",
+          "2. Solução Salina Fisiológica 0,9% — Realizar lavagem nasal 3 vezes ao dia com seringa de 10ml",
+          "3. Hidratação oral abundante (2 a 3 litros de água por dia) e repouso relativo"
+        ],
+        "bodyText": "Paciente orientada sobre sinais de alerta como falta de ar, febre persistente por mais de 72h ou prostração excessiva. Caso ocorram, procurar imediatamente uma unidade de pronto atendimento (UPA).",
+        "validityDays": 30,
+        "demonstrativeNotice": "Documento gerado em ambiente de simulação acadêmica do SUS CONECT. Sem validade fiscal ou farmacêutica oficial."
+      }
+    },
+    {
+      "id": "doc_2",
+      "citizenId": "user_citizen_demo",
+      "citizenName": "Maria Silva",
+      "title": "Declaração de Comparecimento Virtual",
+      "type": "atestado",
+      "issuedDate": "2026-11-04",
+      "doctorName": "Dra. Helena Martins",
+      "specialty": "Clínica Geral",
+      "documentNumber": "DEC-SUS-2026-1104",
+      "content": {
+        "diagnosisOrSubject": "Atendimento por Teleconsulta Virtual",
+        "bodyText": "Declaro para os devidos fins de comprovação acadêmica que a cidadã Maria Silva participou de teleorientação em saúde no dia 04/11/2026, no horário das 14:00 às 14:40, através da plataforma digital SUS CONECT.",
+        "demonstrativeNotice": "Simulação acadêmica para o projeto Formação Geração Tech 4.0."
+      }
+    },
+    {
+      "id": "doc_3",
+      "citizenId": "user_citizen_demo",
+      "citizenName": "Maria Silva",
+      "title": "Guia de Encaminhamento Demonstrativa",
+      "type": "encaminhamento",
+      "issuedDate": "2026-10-22",
+      "doctorName": "Dr. Marcelo Azevedo",
+      "specialty": "Cardiologia",
+      "documentNumber": "ENC-SUS-2026-0418",
+      "content": {
+        "diagnosisOrSubject": "Encaminhamento para Monitoramento Ambulatorial de Pressão",
+        "bodyText": "Encaminha-se a paciente para acompanhamento com equipe multidisciplinar e orientação de mapa de pressão arterial devido a episódios leves de oscilação pressórica associados a estresse de rotina.",
+        "items": [
+          "Aferição diária de pressão em repouso por 7 dias consecutivos",
+          "Redução moderada de sódio na dieta e caminhadas leves de 30 minutos"
+        ],
+        "demonstrativeNotice": "Exemplar demonstrativo acadêmico sem validade para regulação oficial."
+      }
+    },
+    {
+      "id": "doc_4",
+      "citizenId": "user_citizen_demo",
+      "citizenName": "Maria Silva",
+      "title": "Plano de Cuidados e Higiene do Sono",
+      "type": "orientacao",
+      "issuedDate": "2026-10-15",
+      "doctorName": "Psic. Amanda Lima",
+      "specialty": "Psicologia",
+      "documentNumber": "ORI-SUS-2026-0771",
+      "content": {
+        "diagnosisOrSubject": "Higiene do Sono e Redução de Ansiedade Noturna",
+        "items": [
+          "1. Desconectar de telas e celulares pelo menos 45 minutos antes de deitar",
+          "2. Praticar respiração diafragmática profunda por 5 minutos ao deitar",
+          "3. Evitar bebidas estimulantes (café, refrigerantes à base de cola e energéticos) após as 16h"
+        ],
+        "bodyText": "Orientações práticas de autocuidado emocional e fortalecimento da resiliência propostas durante a teleorientação em saúde mental.",
+        "demonstrativeNotice": "Material demonstrativo para apresentação à banca examinadora."
+      }
+    }
+  ],
+  "webhookLogs": [
+    {
+      "target": "telegram",
+      "event": "AGENDAMENTO_CONFIRMADO_AUTOMATICO",
+      "payload": {
+        "appointmentId": "apt_mw5vcrfh26e2",
+        "citizen": "Maria Silva",
+        "professional": "Dra. Helena Martins",
+        "specialty": "Clínica Geral",
+        "datetime": "2026-11-07 às 10:00"
+      },
+      "status": "sent",
+      "message": "🔔 [SUS CONECT] Agendamento confirmado automaticamente para Clínica Geral com Dra. Helena Martins solicitado por Maria Silva.",
+      "id": "log_mw5vcrfh",
+      "timestamp": "2026-11-07T03:53:59.261Z"
+    },
+    {
+      "target": "telegram",
+      "event": "TELECONSULTA_INICIADA",
+      "payload": {
+        "appointmentId": "apt_mw5vcrfh26e2",
+        "startedAt": "2026-11-07T03:54:02.471Z",
+        "professional": "Dra. Helena Martins",
+        "citizen": "Maria Silva"
+      },
+      "status": "sent",
+      "message": "📹 [TELECONSULTA] Atendimento iniciado pelo profissional Dra. Helena Martins com o paciente Maria Silva. Cronômetro de 10 minutos acionado.",
+      "id": "log_mw5vctwn",
+      "timestamp": "2026-11-07T03:54:02.471Z"
+    },
+    {
+      "target": "telegram",
+      "event": "EXTENSAO_CLINICA_AUTORIZADA",
+      "payload": {
+        "appointmentId": "apt_mw5vcrfh26e2",
+        "additionalMinutes": 5,
+        "totalExtensionMinutes": 5,
+        "reason": "Necessidade de acompanhamento dos sintomas",
+        "professional": "Dra. Helena Martins"
+      },
+      "status": "sent",
+      "message": "⏱️ [SEGURANÇA CLÍNICA] Extensão excepcional de +5 min autorizada pelo profissional Dra. Helena Martins. Motivo: Necessidade de acompanhamento dos sintomas",
+      "id": "log_mw5vcwnt",
+      "timestamp": "2026-11-07T03:54:06.041Z"
+    },
+    {
+      "target": "telegram",
+      "event": "TELECONSULTA_CONCLUIDA",
+      "payload": {
+        "appointmentId": "apt_mw5vcrfh26e2",
+        "endedAt": "2026-11-07T03:54:10.881Z",
+        "effectiveDurationSeconds": 245,
+        "professional": "Dra. Helena Martins",
+        "citizen": "Maria Silva"
+      },
+      "status": "sent",
+      "message": "✅ [TELECONSULTA] Consulta concluída com êxito! Duração efetiva: 245 segundos.",
+      "id": "log_mw5vd0e9",
+      "timestamp": "2026-11-07T03:54:10.881Z"
+    }
+  ]
+}

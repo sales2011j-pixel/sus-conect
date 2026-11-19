@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { User, UserRole } from '../types/index.ts';
+import { User, UserRole, RegisterData } from '../types/index.ts';
 import { api } from '../services/api.ts';
 
 interface AuthContextType {
@@ -8,7 +8,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (email: string, pass: string) => Promise<void>;
-  register: (name: string, email: string, phone: string, pass: string) => Promise<void>;
+  register: (dataOrName: RegisterData | string, email?: string, phone?: string, pass?: string) => Promise<void>;
   logout: () => void;
   switchDemoUser: (role: UserRole) => void;
   isAuthModalOpen: boolean;
@@ -64,12 +64,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setIsAuthModalOpen(false);
   };
 
-  const register = async (name: string, email: string, phone: string, pass: string) => {
-    const res = await api.register({ name, email, phone, password: pass });
+  const register = async (
+    dataOrName: RegisterData | string,
+    email?: string,
+    phone?: string,
+    pass?: string
+  ) => {
+    let payload: RegisterData;
+    if (typeof dataOrName === 'string') {
+      payload = {
+        name: dataOrName,
+        email: email || '',
+        phone: phone || '',
+        password: pass || '',
+      };
+    } else {
+      payload = dataOrName;
+    }
+    const res = await api.register(payload);
     setUser(res.user);
     localStorage.setItem('sus_conect_session', JSON.stringify(res.user));
     setIsAuthModalOpen(false);
   };
+
 
   const logout = () => {
     setUser(null);

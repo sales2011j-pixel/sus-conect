@@ -109,21 +109,25 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   src={ASSETS.homepageBanner}
                   alt="Acolhimento humanizado em saúde pública"
                   referrerPolicy="no-referrer"
-                  className="w-full h-[440px] object-cover group-hover:scale-102 transition-transform duration-500"
+                  className="w-full h-64 sm:h-80 lg:h-[440px] object-cover group-hover:scale-102 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent flex flex-col justify-end p-6 text-white">
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent flex flex-col justify-end p-6 text-white">
                   <div className="flex items-center gap-2 mb-1.5">
                     <HeartHandshake className="w-5 h-5 text-emerald-400" />
                     <span className="text-xs uppercase font-bold tracking-wider text-emerald-300">
-                      Saúde Pública e Humanização
+                      Telemedicina Humanizada
                     </span>
                   </div>
-                  <p className="text-sm font-semibold text-white/95 leading-snug">
-                    "A tecnologia a serviço de quem mais precisa: orientação rápida e acesso digno à saúde."
+                  <p className="text-base sm:text-lg font-bold text-white leading-snug drop-shadow-xs">
+                    "A tecnologia aproxima. O cuidado conecta."
+                  </p>
+                  <p className="text-xs text-blue-100/90 mt-1">
+                    Conectando médicos e cidadãos pelo acolhimento digital e acesso ágil à saúde pública.
                   </p>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -204,7 +208,126 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </section>
 
+      {/* 2.1 CONCEITO VISUAL: TELEMEDICINA HUMANIZADA */}
+      <section className="py-20 bg-slate-50 border-b border-slate-200/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-bold text-[#1E6FB8] uppercase tracking-wider block mb-2">
+              Conexão Real em Saúde Digital
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0D47A1] tracking-tight">
+              A tecnologia aproxima. O cuidado conecta.
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
+              Substituímos o ambiente impessoal de hospitais tradicionais e a espera por um modelo de telemedicina focado na dignidade e na proximidade humana. Conheça os dois lados dessa conexão:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-12">
+            {/* Lado do Profissional */}
+            <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow">
+              <div className="relative h-64 sm:h-72 overflow-hidden">
+                <img
+                  src={ASSETS.doctorTeleconsulta}
+                  alt="Médica em consultório realizando teleconsulta humanizada"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4 bg-[#0D47A1]/90 backdrop-blur-xs text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-sm">
+                  <Video className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Lado do Profissional</span>
+                </div>
+              </div>
+              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">
+                    Escuta Atenta e Ambiente Acolhedor
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Médicos e psicólogos em consultórios organizados e confortáveis, utilizando videoconferência e prontuário digital para examinar queixas e orientar condutas com dedicação integral.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                  <span className="font-semibold text-[#1E6FB8]">Prontuário digital seguro</span>
+                  <span className="font-semibold text-emerald-600">Áudio e vídeo em tempo real</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Lado do Cidadão */}
+            <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-sm flex flex-col justify-between group hover:shadow-md transition-shadow">
+              <div className="relative h-64 sm:h-72 overflow-hidden">
+                <img
+                  src={ASSETS.patientTeleconsulta}
+                  alt="Paciente no conforto do lar conversando com o médico pelo celular"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
+                />
+                <div className="absolute top-4 left-4 bg-[#00A884]/90 backdrop-blur-xs text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-sm">
+                  <HeartHandshake className="w-3.5 h-3.5 text-white" />
+                  <span>Lado do Cidadão</span>
+                </div>
+              </div>
+              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">
+                    Cuidado no Conforto do seu Lar
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Sem enfrentar trânsito, ônibus lotados ou esperas cansativas. Basta acessar pelo celular ou computador para falar com o especialista na hora marcada, com toda a tranquilidade da sua casa.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                  <span className="font-semibold text-[#1E6FB8]">Sem filas ou deslocamentos</span>
+                  <span className="font-semibold text-emerald-600">Acolhimento familiar digno</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Destaque Atendimento Familiar Inclusivo */}
+          <div className="bg-gradient-to-r from-[#0D47A1] to-[#1E6FB8] rounded-3xl overflow-hidden shadow-xl text-white">
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+              <div className="lg:col-span-7 p-8 sm:p-12 space-y-4">
+                <span className="text-xs uppercase font-extrabold tracking-wider text-emerald-300 bg-white/10 px-3 py-1 rounded-full inline-block">
+                  Acesso Democrático à Saúde
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-black tracking-tight leading-snug">
+                  Cuidado Integral para Mães, Idosos, Jovens e Trabalhadores
+                </h3>
+                <p className="text-xs sm:text-sm text-blue-100 leading-relaxed">
+                  A teleconsulta é uma ponte humanizada que conecta as famílias brasileiras às orientações de saúde preventiva e especializada, garantindo suporte ágil quando os sintomas começam.
+                </p>
+                <div className="pt-2 flex flex-wrap gap-3">
+                  <button
+                    onClick={() => openAuthModal('register')}
+                    className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs transition-colors shadow-sm cursor-pointer"
+                  >
+                    Cadastre-se com CPF e Cartão SUS
+                  </button>
+                  <button
+                    onClick={onOpenAnaChat}
+                    className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs transition-colors border border-white/20 cursor-pointer"
+                  >
+                    Tirar Dúvidas com SUS ANA
+                  </button>
+                </div>
+              </div>
+              <div className="lg:col-span-5 h-64 sm:h-80 lg:h-full relative overflow-hidden">
+                <img
+                  src={ASSETS.familyTeleconsulta}
+                  alt="Mãe e filho em teleconsulta com pediatra"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 3. GRID DAS 12 ÁREAS DE ATENDIMENTO */}
+
       <SpecialtiesGrid specialties={specialties} onSelectSpecialty={onSelectSpecialty} />
 
       {/* 4. SEÇÃO SUS ANA COM APRESENTAÇÃO */}
@@ -279,13 +402,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-slate-900 mb-1">
-                    Sem Burocracia no Cadastro
+                    Cadastro Completo e Protegido
                   </h4>
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    Você não precisa digitar CPF, número do Cartão SUS ou comprovante de residência. Basta nome, e-mail e telefone para iniciar o atendimento.
+                    Identificação segura com CPF, Cartão SUS e busca automática de endereço por CEP (ViaCEP), protegido pelas diretrizes da LGPD com mascaramento de dados.
                   </p>
                 </div>
               </div>
+
 
               <div className="flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-emerald-100 text-[#00A884] flex items-center justify-center shrink-0">

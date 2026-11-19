@@ -110,10 +110,35 @@ class Database {
     return this.data.users.find((u) => u.id === id);
   }
 
-  public createUser(userData: { name: string; email: string; phone: string; password: string; role?: 'citizen' | 'admin' }) {
+  public getUserById(id: string) {
+    return this.findUserById(id);
+  }
+
+  public createUser(userData: {
+    name: string;
+    email: string;
+    phone: string;
+    password: string;
+    role?: string;
+    cpf?: string;
+    susCard?: string;
+    cep?: string;
+    street?: string;
+    number?: string;
+    complement?: string;
+    neighborhood?: string;
+    city?: string;
+    state?: string;
+  }) {
     const existing = this.findUserByEmail(userData.email);
     if (existing) {
       throw new Error('E-mail já cadastrado na plataforma.');
+    }
+
+    // RIGOR DE SEGURANÇA: Todo novo usuário cadastrado recebe estritamente 'citizen'.
+    // Tentativas de auto-atribuição de 'admin', 'doctor' ou qualquer outro papel são bloqueadas.
+    if (userData.role && userData.role !== 'citizen') {
+      throw new Error('Tentativa de auto-atribuição de privilégios não autorizada. Novos usuários são sempre cadastrados com o papel "citizen".');
     }
 
     const newUser = {
@@ -121,8 +146,17 @@ class Database {
       name: userData.name,
       email: userData.email.toLowerCase(),
       phone: userData.phone,
-      role: userData.role || 'citizen',
+      role: 'citizen' as const, // Forçado para citizen
       passwordHash: userData.password,
+      cpf: userData.cpf || '',
+      susCard: userData.susCard || '',
+      cep: userData.cep || '',
+      street: userData.street || '',
+      number: userData.number || '',
+      complement: userData.complement || '',
+      neighborhood: userData.neighborhood || '',
+      city: userData.city || '',
+      state: userData.state || '',
       createdAt: new Date().toISOString(),
     };
 
@@ -131,6 +165,34 @@ class Database {
 
     // Remove passwordHash for public return
     const { passwordHash: _, ...safeUser } = newUser;
+    return safeUser;
+  }
+
+  public updateUserProfile(userId: string, updates: Record<string, any>) {
+    const user = this.getUserById(userId);
+    if (!user) {
+      throw new Error('Usuário não encontrado.');
+    }
+
+    // RIGOR DE SEGURANÇA: O campo role NUNCA pode ser alterado por esta operação
+    if ('role' in updates && updates.role !== user.role) {
+      throw new Error('Alteração de papel (role) não autorizada. Apenas administradores do sistema podem gerenciar privilégios.');
+    }
+
+    // Atualização segura apenas de campos permitidos
+    const allowedFields = [
+      'name', 'phone', 'cpf', 'susCard',
+      'cep', 'street', 'number', 'complement', 'neighborhood', 'city', 'state'
+    ];
+
+    for (const field of allowedFields) {
+      if (updates[field] !== undefined) {
+        (user as any)[field] = updates[field];
+      }
+    }
+
+    this.saveToDisk();
+    const { passwordHash: _, ...safeUser } = user;
     return safeUser;
   }
 
@@ -216,6 +278,7 @@ class Database {
     date: string;
     time: string;
     reason: string;
+    citizenPhone?: string;
   }) {
     const citizen = this.findUserById(data.citizenId);
     const professional = this.getProfessionalById(data.professionalId);
@@ -225,19 +288,20 @@ class Database {
     if (!professional) throw new Error('Profissional de saúde não encontrado.');
     if (!specialty) throw new Error('Área de atendimento não encontrada.');
 
+    // Auto-confirmation rule: booking is immediately confirmed by the system
     const newAppointment: Appointment = {
       id: 'apt_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 6),
       citizenId: citizen.id,
       citizenName: citizen.name,
       citizenEmail: citizen.email,
-      citizenPhone: citizen.phone,
+      citizenPhone: data.citizenPhone || citizen.phone || '',
       professionalId: professional.id,
       professionalName: professional.name,
       specialtyId: specialty.id,
       specialtyName: specialty.name,
       date: data.date,
       time: data.time,
-      status: 'solicitado',
+      status: 'confirmado', // Automatically confirmed by the system
       reason: data.reason,
       virtualRoomId: `sala-sus-${specialty.slug}-${Math.floor(1000 + Math.random() * 9000)}`,
       createdAt: new Date().toISOString(),
@@ -245,10 +309,10 @@ class Database {
 
     this.data.appointments.unshift(newAppointment);
 
-    // Auto-create demonstrative notification
+    // Auto-create demonstrative notification for confirmation
     this.addWebhookLog({
       target: 'telegram',
-      event: 'NOVA_SOLICITACAO_TELECONSULTA',
+      event: 'AGENDAMENTO_CONFIRMADO_AUTOMATICO',
       payload: {
         appointmentId: newAppointment.id,
         citizen: newAppointment.citizenName,
@@ -257,7 +321,7 @@ class Database {
         datetime: `${newAppointment.date} às ${newAppointment.time}`,
       },
       status: 'sent',
-      message: `🔔 [SUS CONECT] Nova solicitação de teleconsulta para ${newAppointment.specialtyName} com ${newAppointment.professionalName} solicitada por ${newAppointment.citizenName}.`,
+      message: `🔔 [SUS CONECT] Agendamento confirmado automaticamente para ${newAppointment.specialtyName} com ${newAppointment.professionalName} solicitado por ${newAppointment.citizenName}.`,
     });
 
     this.saveToDisk();
@@ -277,7 +341,7 @@ class Database {
       appointment.notes = notes;
     }
 
-    // Auto log telegram notification for admin status change
+    // Auto log telegram notification for status change
     this.addWebhookLog({
       target: 'telegram',
       event: `STATUS_${status.toUpperCase()}`,
@@ -288,11 +352,163 @@ class Database {
         datetime: `${appointment.date} às ${appointment.time}`,
       },
       status: 'sent',
-      message: `📋 [ADMINISTRATIVO] Agendamento ${appointment.id} atualizado para status '${status}' (${appointment.citizenName} - ${appointment.specialtyName}).`,
+      message: `📋 [SISTEMA] Agendamento ${appointment.id} atualizado para status '${status}' (${appointment.citizenName} - ${appointment.specialtyName}).`,
     });
 
     this.saveToDisk();
     return appointment;
+  }
+
+  // --- Teleconsulta Lifecycle & Synchronized Countdown ---
+  public startTeleconsulta(appointmentId: string) {
+    const appointment = this.getAppointmentById(appointmentId);
+    if (!appointment) throw new Error('Agendamento não encontrado.');
+
+    if (!appointment.startedAt) {
+      appointment.startedAt = new Date().toISOString();
+      appointment.status = 'em_andamento';
+      appointment.videoSessionId = 'session_' + Date.now().toString(36);
+
+      this.addWebhookLog({
+        target: 'telegram',
+        event: 'TELECONSULTA_INICIADA',
+        payload: {
+          appointmentId: appointment.id,
+          startedAt: appointment.startedAt,
+          professional: appointment.professionalName,
+          citizen: appointment.citizenName,
+        },
+        status: 'sent',
+        message: `📹 [TELECONSULTA] Atendimento iniciado pelo profissional ${appointment.professionalName} com o paciente ${appointment.citizenName}. Cronômetro de 10 minutos acionado.`,
+      });
+
+      this.saveToDisk();
+    }
+
+    return this.getTeleconsultaSession(appointmentId);
+  }
+
+  public finishTeleconsulta(appointmentId: string, durationSeconds?: number, notes?: string) {
+    const appointment = this.getAppointmentById(appointmentId);
+    if (!appointment) throw new Error('Agendamento não encontrado.');
+
+    appointment.status = 'concluido';
+    appointment.endedAt = new Date().toISOString();
+
+    if (durationSeconds !== undefined) {
+      appointment.effectiveDurationSeconds = durationSeconds;
+    } else if (appointment.startedAt) {
+      const elapsed = Math.floor(
+        (new Date(appointment.endedAt).getTime() - new Date(appointment.startedAt).getTime()) / 1000
+      );
+      appointment.effectiveDurationSeconds = elapsed;
+    }
+
+    if (notes) {
+      appointment.notes = appointment.notes ? `${appointment.notes} | ${notes}` : notes;
+    }
+
+    this.addWebhookLog({
+      target: 'telegram',
+      event: 'TELECONSULTA_CONCLUIDA',
+      payload: {
+        appointmentId: appointment.id,
+        endedAt: appointment.endedAt,
+        effectiveDurationSeconds: appointment.effectiveDurationSeconds,
+        professional: appointment.professionalName,
+        citizen: appointment.citizenName,
+      },
+      status: 'sent',
+      message: `✅ [TELECONSULTA] Consulta concluída com êxito! Duração efetiva: ${appointment.effectiveDurationSeconds || 0} segundos.`,
+    });
+
+    this.saveToDisk();
+    return appointment;
+  }
+
+  public extendTeleconsulta(appointmentId: string, reason: string, additionalMinutes: number = 5) {
+    const appointment = this.getAppointmentById(appointmentId);
+    if (!appointment) throw new Error('Agendamento não encontrado.');
+
+    const currentExt = appointment.clinicalExtensionMinutes || 0;
+    appointment.clinicalExtensionMinutes = currentExt + additionalMinutes;
+    appointment.clinicalExtensionReason = reason;
+
+    this.addWebhookLog({
+      target: 'telegram',
+      event: 'EXTENSAO_CLINICA_AUTORIZADA',
+      payload: {
+        appointmentId: appointment.id,
+        additionalMinutes,
+        totalExtensionMinutes: appointment.clinicalExtensionMinutes,
+        reason,
+        professional: appointment.professionalName,
+      },
+      status: 'sent',
+      message: `⏱️ [SEGURANÇA CLÍNICA] Extensão excepcional de +${additionalMinutes} min autorizada pelo profissional ${appointment.professionalName}. Motivo: ${reason}`,
+    });
+
+    this.saveToDisk();
+    return this.getTeleconsultaSession(appointmentId);
+  }
+
+  public getTeleconsultaSession(appointmentId: string) {
+    const appointment = this.getAppointmentById(appointmentId);
+    if (!appointment) throw new Error('Agendamento não encontrado.');
+
+    const now = Date.now();
+    const baseLimitSeconds = 600; // 10 minutes
+    const extensionSeconds = (appointment.clinicalExtensionMinutes || 0) * 60;
+    const totalLimitSeconds = baseLimitSeconds + extensionSeconds;
+
+    let remainingSeconds = totalLimitSeconds;
+
+    if (appointment.startedAt) {
+      const startMs = new Date(appointment.startedAt).getTime();
+      const elapsedSeconds = Math.max(0, Math.floor((now - startMs) / 1000));
+      remainingSeconds = Math.max(0, totalLimitSeconds - elapsedSeconds);
+
+      // Auto finish if reached 00:00 and still marked as 'em_andamento'
+      if (remainingSeconds <= 0 && appointment.status === 'em_andamento') {
+        appointment.status = 'concluido';
+        appointment.endedAt = new Date().toISOString();
+        appointment.effectiveDurationSeconds = totalLimitSeconds;
+        this.saveToDisk();
+      }
+    }
+
+    return {
+      appointmentId: appointment.id,
+      roomId: appointment.virtualRoomId,
+      status: appointment.status,
+      startedAt: appointment.startedAt || null,
+      serverNow: new Date().toISOString(),
+      durationLimitSeconds: totalLimitSeconds,
+      remainingSeconds,
+      doctorConnected: false, // populated dynamically by socket registry
+      patientConnected: false, // populated dynamically by socket registry
+      clinicalExtensionMinutes: appointment.clinicalExtensionMinutes || 0,
+      appointment,
+    };
+  }
+
+  public getDoctorAgenda(professionalId?: string, date?: string) {
+    let list = this.data.appointments;
+
+    if (professionalId && professionalId !== 'all') {
+      list = list.filter((a) => a.professionalId === professionalId);
+    }
+
+    if (date) {
+      list = list.filter((a) => a.date === date);
+    }
+
+    // Sort chronologically by date and time
+    return list.sort((a, b) => {
+      const dateTimeA = new Date(`${a.date}T${a.time.replace('h', ':')}:00`).getTime();
+      const dateTimeB = new Date(`${b.date}T${b.time.replace('h', ':')}:00`).getTime();
+      return dateTimeA - dateTimeB;
+    });
   }
 
   // --- Demonstrative Documents ---

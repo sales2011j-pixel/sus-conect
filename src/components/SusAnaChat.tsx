@@ -98,6 +98,7 @@ export const SusAnaChat: React.FC<SusAnaChatProps> = ({
         sender: 'ana',
         text: res.reply,
         timestamp: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+        suggestions: res.suggestions,
       };
 
       setMessages((prev) => [...prev, anaMessage]);
@@ -286,7 +287,7 @@ export const SusAnaChat: React.FC<SusAnaChatProps> = ({
 
   if (isFloating) {
     return (
-      <div className="fixed bottom-6 right-6 z-50 w-96 max-w-[calc(100vw-2rem)] h-[540px] max-h-[85vh]">
+      <div className="fixed inset-x-2 bottom-20 sm:bottom-6 sm:right-6 sm:left-auto sm:w-96 z-50 h-[78vh] sm:h-[540px] max-h-[90vh]">
         {content}
       </div>
     );
@@ -304,22 +305,23 @@ export const SusAnaChatFloatingButton: React.FC<{ onClick: () => void; isOpen: b
   return (
     <button
       onClick={onClick}
-      className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 bg-gradient-to-r from-[#1E6FB8] to-[#00A884] text-white px-4 py-3 rounded-full shadow-xl hover:shadow-2xl hover:scale-103 transition-all cursor-pointer group"
+      className="fixed bottom-20 md:bottom-6 right-4 sm:right-6 z-30 flex items-center gap-2 sm:gap-2.5 bg-gradient-to-r from-[#1E6FB8] to-[#00A884] text-white px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-full shadow-xl hover:shadow-2xl hover:scale-103 transition-all cursor-pointer group"
     >
       <div className="relative">
         <img
           src={ASSETS.susAnaAvatar}
           alt="SUS ANA"
           referrerPolicy="no-referrer"
-          className="w-9 h-9 rounded-full object-cover border-2 border-white"
+          className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover border-2 border-white"
         />
         <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border border-white rounded-full"></span>
       </div>
       <div className="text-left pr-1">
-        <span className="text-xs font-bold block leading-tight">Falar com SUS ANA</span>
-        <span className="text-[10px] text-white/90">Orientação & Agendamento</span>
+        <span className="text-xs font-bold block leading-tight">SUS ANA</span>
+        <span className="text-[10px] text-white/90 hidden sm:inline">Orientação & Agendamento</span>
+        <span className="text-[10px] text-emerald-200 sm:hidden">Online</span>
       </div>
-      <MessageSquare className="w-4 h-4 text-white/90 group-hover:translate-x-0.5 transition-transform" />
+      <MessageSquare className="w-4 h-4 text-white/90 group-hover:translate-x-0.5 transition-transform hidden sm:inline" />
     </button>
   );
 };

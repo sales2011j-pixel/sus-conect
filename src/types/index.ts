@@ -7,7 +7,34 @@ export interface User {
   phone: string;
   role: UserRole;
   createdAt: string;
+  // Campos ampliados de identificação pessoal e endereço
+  cpf?: string;
+  susCard?: string;
+  cep?: string;
+  street?: string;
+  number?: string;
+  complement?: string;
+  neighborhood?: string;
+  city?: string;
+  state?: string;
 }
+
+export interface RegisterData {
+  name: string;
+  email: string;
+  phone?: string;
+  password: string;
+  cpf?: string;
+  susCard?: string;
+  cep?: string;
+  street?: string;
+  number?: string;
+  complement?: string;
+  neighborhood?: string;
+  city?: string;
+  state?: string;
+}
+
 
 export interface Specialty {
   id: string;
@@ -31,7 +58,14 @@ export interface Professional {
   bioSummary: string;
 }
 
-export type AppointmentStatus = 'solicitado' | 'confirmado' | 'em_andamento' | 'concluido' | 'cancelado';
+export type AppointmentStatus =
+  | 'solicitado'
+  | 'confirmado'
+  | 'aguardando_paciente'
+  | 'em_andamento'
+  | 'concluido'
+  | 'paciente_ausente'
+  | 'cancelado';
 
 export interface Appointment {
   id: string;
@@ -50,6 +84,25 @@ export interface Appointment {
   notes?: string;
   virtualRoomId: string;
   createdAt: string;
+  startedAt?: string;
+  endedAt?: string;
+  effectiveDurationSeconds?: number;
+  videoSessionId?: string;
+  clinicalExtensionReason?: string;
+  clinicalExtensionMinutes?: number;
+}
+
+export interface TeleconsultaSession {
+  appointmentId: string;
+  roomId: string;
+  status: AppointmentStatus;
+  startedAt: string | null;
+  serverNow: string;
+  durationLimitSeconds: number;
+  remainingSeconds: number;
+  doctorConnected: boolean;
+  patientConnected: boolean;
+  clinicalExtensionMinutes?: number;
 }
 
 export interface DemonstrativeDocument {

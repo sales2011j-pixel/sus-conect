@@ -4,7 +4,10 @@ import { Specialty, Professional, Appointment, DemonstrativeDocument } from '../
 import { api } from '../services/api.ts';
 import { DocumentModal } from '../components/DocumentModal.tsx';
 import { TeleconsultaRoom } from '../components/TeleconsultaRoom.tsx';
+import { WaitingRoom } from '../components/WaitingRoom.tsx';
 import { SusAnaChat } from '../components/SusAnaChat.tsx';
+import { maskCPFForDisplay, maskCartaoSUSForDisplay, formatPhone } from '../utils/masksAndValidators.ts';
+
 import {
   Calendar,
   Clock,
@@ -40,6 +43,7 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({
 
   // Modals & Active Rooms
   const [selectedDoc, setSelectedDoc] = useState<DemonstrativeDocument | null>(null);
+  const [activeWaitingRoomAppointment, setActiveWaitingRoomAppointment] = useState<Appointment | null>(null);
   const [activeTeleRoomAppointment, setActiveTeleRoomAppointment] = useState<Appointment | null>(null);
 
   // New Booking Wizard State
@@ -49,9 +53,16 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('09:30');
   const [reason, setReason] = useState<string>('');
+  const [whatsappPhone, setWhatsappPhone] = useState<string>(user?.phone ? formatPhone(user.phone) : '');
   const [bookingLoading, setBookingLoading] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState<Appointment | null>(null);
   const [bookingError, setBookingError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (user?.phone) {
+      setWhatsappPhone((prev) => prev || formatPhone(user.phone));
+    }
+  }, [user?.phone]);
 
   // Set initial default date to tomorrow
   useEffect(() => {
@@ -119,6 +130,9 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({
     try {
       const created = await api.createAppointment({
         citizenId: user.id,
+        citizenName: user.name,
+        citizenEmail: user.email,
+        citizenPhone: whatsappPhone || user.phone || '',
         professionalId: selectedProfessionalId,
         specialtyId: selectedSpecialtyId,
         date: selectedDate,
@@ -366,13 +380,23 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 w-full sm:w-auto">
                     <button
-                      onClick={() => setActiveTeleRoomAppointment(appointments[0])}
-                      className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-2 shadow-xs"
+                      onClick={() => {
+                        if (appointments[0].status === 'em_andamento') {
+                          setActiveTeleRoomAppointment(appointments[0]);
+                        } else {
+                          setActiveWaitingRoomAppointment(appointments[0]);
+                        }
+                      }}
+                      className="w-full sm:w-auto px-5 py-3 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white font-bold text-xs rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 shadow-md shadow-emerald-600/20 min-h-[44px]"
                     >
-                      <Video className="w-4 h-4" />
-                      <span>Entrar na Sala Virtual</span>
+                      <Video className="w-4 h-4 text-emerald-100" />
+                      <span>
+                        {appointments[0].status === 'em_andamento'
+                          ? 'Entrar na Chamada em Andamento'
+                          : 'Acessar Sala de Espera Virtual'}
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -464,6 +488,11 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({
                     <strong>{new Date(bookingSuccess.date).toLocaleDateString('pt-BR')} às {bookingSuccess.time}</strong>{' '}
                     foi confirmada e enviada para coordenação médica.
                   </p>
+                  {bookingSuccess.citizenPhone && (
+                    <p className="text-[11px] text-emerald-800 bg-emerald-100/70 px-3 py-1.5 rounded-lg inline-block font-medium">
+                      📲 Confirmação automática encaminhada para o WhatsApp <strong>{bookingSuccess.citizenPhone}</strong>.
+                    </p>
+                  )}
                   <div className="pt-2 flex gap-3">
                     <button
                       onClick={() => setActiveTeleRoomAppointment(bookingSuccess)}
@@ -603,6 +632,24 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({
                   ></textarea>
                 </div>
 
+                {/* Step 5: WhatsApp Number Confirmation */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                    6. WhatsApp para Confirmação da Teleconsulta
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    value={whatsappPhone}
+                    onChange={(e) => setWhatsappPhone(formatPhone(e.target.value))}
+                    placeholder="(11) 99999-9999"
+                    className="w-full px-4 py-2.5 text-sm bg-slate-50 border border-slate-300 rounded-xl font-mono focus:outline-hidden focus:ring-2 focus:ring-[#1E6FB8]"
+                  />
+                  <p className="text-[11px] text-slate-500 mt-1">
+                    Você receberá neste WhatsApp a confirmação automática com data, horário, médico e especialidade.
+                  </p>
+                </div>
+
                 <div className="pt-2">
                   <button
                     type="submit"
@@ -682,16 +729,26 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({
                       )}
                     </div>
 
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto">
                       {getStatusBadge(apt.status)}
 
                       {apt.status !== 'cancelado' && (
                         <button
-                          onClick={() => setActiveTeleRoomAppointment(apt)}
-                          className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs whitespace-nowrap"
+                          onClick={() => {
+                            if (apt.status === 'em_andamento') {
+                              setActiveTeleRoomAppointment(apt);
+                            } else {
+                              setActiveWaitingRoomAppointment(apt);
+                            }
+                          }}
+                          className="w-full sm:w-auto px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white font-bold text-xs rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 shadow-2xs whitespace-nowrap min-h-[44px]"
                         >
-                          <Video className="w-4 h-4" />
-                          <span>Entrar na Sala Virtual</span>
+                          <Video className="w-4 h-4 text-emerald-100" />
+                          <span>
+                            {apt.status === 'em_andamento'
+                              ? 'Entrar na Chamada'
+                              : 'Sala de Espera & Câmera'}
+                          </span>
                         </button>
                       )}
                     </div>
@@ -777,21 +834,37 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({
               </p>
             </div>
 
-            <div className="space-y-4 text-xs">
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
-                <span className="text-slate-500">Nome:</span>
+            <div className="space-y-3.5 text-xs">
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                <span className="text-slate-500 font-medium">Nome Completo:</span>
                 <span className="font-bold text-slate-900">{user?.name}</span>
               </div>
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
-                <span className="text-slate-500">E-mail:</span>
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                <span className="text-slate-500 font-medium">E-mail de Acesso:</span>
                 <span className="font-mono text-slate-900">{user?.email}</span>
               </div>
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
-                <span className="text-slate-500">Telefone:</span>
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                <span className="text-slate-500 font-medium">CPF (Protegido por LGPD):</span>
+                <span className="font-mono font-semibold text-slate-800">{maskCPFForDisplay(user?.cpf)}</span>
+              </div>
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                <span className="text-slate-500 font-medium">Cartão Nacional de Saúde (SUS):</span>
+                <span className="font-mono font-semibold text-slate-800">{maskCartaoSUSForDisplay(user?.susCard)}</span>
+              </div>
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                <span className="text-slate-500 font-medium">Telefone / WhatsApp:</span>
                 <span className="font-mono text-slate-900">{user?.phone || 'Não informado'}</span>
               </div>
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
-                <span className="text-slate-500">Perfil de Acesso:</span>
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-start">
+                <span className="text-slate-500 font-medium">Endereço Residencial:</span>
+                <span className="text-right text-slate-800 font-medium max-w-[280px]">
+                  {user?.street
+                    ? `${user.street}, ${user.number || 'S/N'}${user.complement ? ` (${user.complement})` : ''} - ${user.neighborhood}, ${user.city}/${user.state} (CEP ${user.cep})`
+                    : 'Endereço padrão de demonstração'}
+                </span>
+              </div>
+              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex justify-between items-center">
+                <span className="text-slate-500 font-medium">Perfil de Acesso:</span>
                 <span className="font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full uppercase text-[10px]">
                   Cidadão Cadastrado
                 </span>
@@ -799,7 +872,7 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({
             </div>
 
             <div className="p-4 rounded-xl bg-blue-50/70 border border-blue-200 text-xs text-[#0D47A1] leading-relaxed">
-              🔒 <strong>Compromisso de Privacidade:</strong> Sua conta utiliza autenticação direta. Não armazenamos prontuários oficiais nem dados sensíveis de terceiros.
+              🔒 <strong>Compromisso de Privacidade e LGPD:</strong> Seus identificadores pessoais (CPF e Cartão SUS) são mascarados na interface para preservar sua privacidade. Em caso de dúvidas, consulte nossa política de dados.
             </div>
           </div>
         )}
@@ -813,10 +886,24 @@ export const CitizenPortal: React.FC<CitizenPortalProps> = ({
         />
       )}
 
+      {/* Patient Waiting Room */}
+      {activeWaitingRoomAppointment && (
+        <WaitingRoom
+          appointment={activeWaitingRoomAppointment}
+          onEnterCall={() => {
+            const apt = activeWaitingRoomAppointment;
+            setActiveWaitingRoomAppointment(null);
+            setActiveTeleRoomAppointment(apt);
+          }}
+          onClose={() => setActiveWaitingRoomAppointment(null)}
+        />
+      )}
+
       {/* Interactive Teleconsultation Room */}
       {activeTeleRoomAppointment && (
         <TeleconsultaRoom
           appointment={activeTeleRoomAppointment}
+          userRole="patient"
           onClose={() => setActiveTeleRoomAppointment(null)}
           onCompleted={() => {
             loadCitizenData();

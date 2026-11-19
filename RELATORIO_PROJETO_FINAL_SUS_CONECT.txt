@@ -1,0 +1,204 @@
+================================================================================
+RELATORIO TECNICO E DE APRESENTACAO DE PROJETO FINAL
+PROJETO: SUS CONECT — SAUDE DIGITAL & TELECONSULTAS
+PROGRAMA: Formacao Geracao Tech 4.0
+SLOGAN: "A tecnologia aproxima. O cuidado conecta."
+================================================================================
+
+1. VISAO GERAL E PROPOSITO DO PROJETO
+--------------------------------------------------------------------------------
+O SUS CONECT e uma aplicacao web responsiva (Mobile-First) voltada a orientacao
+em saude, acolhimento inteligente e realizacao de teleconsultas digitais em
+tempo real.
+
+Desenvolvido como projeto academico independente da Formacao Geracao Tech 4.0,
+o sistema simula uma plataforma moderna de saude digital capaz de aproximar
+cidadaos e profissionais de saude por meio da tecnologia, reduzindo barreiras
+geograficas e otimizando a triagem e o agendamento.
+
+* Aviso institucional: O SUS CONECT e uma iniciativa academica demonstrativa e
+  nao possui vinculo oficial com o Ministerio da Saude ou com o SUS governamental.
+
+
+2. PROBLEMA RESOLVIDO E OBJETIVOS
+--------------------------------------------------------------------------------
+Problema identificado:
+- Dificuldade de acesso rapido a orientacoes iniciais de saude, sobrecarga de
+  unidades presenciais para casos de baixa complexidade e falta de canais
+  digitais integrados que conectem agendamento, videochamada, orientacao por IA
+  e confirmacao automatizada ao paciente.
+
+Objetivos alcancados:
+1) Disponibilizar um portal acessivel pelo celular e computador com 12 areas de
+   atendimento (11 especialidades medicas + Psicologia) e 90 profissionais.
+2) Oferecer triagem e orientacao conversacional humanizada 24h com a assistente
+   virtual SUS ANA (Inteligencia Artificial com Google Gemini).
+3) Realizar teleconsultas reais em audio e video (WebRTC) com cronometro
+   sincronizado de 10 minutos e sala de espera virtual.
+4) Garantir persistencia real em nuvem (Supabase / PostgreSQL) com isolamento de
+   dados por Row Level Security (RLS) e boas praticas da LGPD.
+5) Automatizar a confirmacao do agendamento diretamente no WhatsApp do paciente
+   por meio de integracao real com n8n + Evolution API.
+
+
+3. ARQUITETURA E TECNOLOGIAS UTILIZADAS
+--------------------------------------------------------------------------------
+Frontend (Interface e Experiencia do Usuario):
+- React 19 + TypeScript + Vite
+- Tailwind CSS v4 (design responsivo adaptado para dispositivos moveis)
+- Lucide React (iconografia clinica) e Motion (transicoes de interface)
+- Navegacao mobile dedicada com barra inferior (MobileBottomNav)
+
+Backend (Servidor de Aplicacao e Tempo Real):
+- Node.js + Express (server.ts)
+- WebSocket Server (ws) para sinalizacao WebRTC e sincronizacao de sala/tempo
+- Validacoes de seguranca e integracao segura com APIs externas (proxy server-side)
+
+Banco de Dados e Autenticacao:
+- Supabase (PostgreSQL gerenciado + Supabase Auth + Row Level Security)
+- Motor local resiliente de contingencia (server/db.ts) para continuidade de
+  operacao e testes offline
+
+Inteligencia Artificial e Automacoes:
+- Google Gemini SDK (@google/genai) — modelos gemini-3.1-flash-lite e
+  gemini-3.8-flash em cadeia de fallback para a assistente SUS ANA
+- ViaCEP API — preenchimento automatico de endereco pelo CEP no cadastro
+- n8n + Evolution API — disparo automatico de confirmacao no WhatsApp
+
+
+4. PRINCIPAIS MODULOS E FUNCIONALIDADES CONSTRUIDAS
+--------------------------------------------------------------------------------
+
+4.1. Pagina Inicial e Catalogo Clinico (HomeView e SpecialtiesGrid)
+- Identidade visual modernizada com foco em telemedicina humanizada e
+  proximidade entre medico e paciente.
+- Catalogo interativo com 12 areas de atendimento: Clinica Geral, Cardiologia,
+  Ortopedia, Oftalmologia, Dermatologia, Ginecologia, Endocrinologia,
+  Neurologia, Otorrinolaringologia, Urologia, Gastroenterologia e Psicologia.
+- Corpo clinico com 90 profissionais ficticios distribuidos entre as areas, com
+  dias de atendimento, turnos e avaliacoes.
+
+4.2. Cadastro Ampliado em 3 Etapas e Conformidade LGPD (AuthModal)
+- Etapa 1 (Identificacao): Nome, e-mail, senha, telefone/WhatsApp, CPF com
+  validacao algoritmica oficial dos digitos verificadores (Modulo 11) e Cartao
+  Nacional de Saude (CNS com validacao de 15 digitos).
+- Etapa 2 (Endereco): Busca automatica via API ViaCEP (preenche logradouro,
+  bairro, cidade e UF automaticamente a partir do CEP) com fallback manual.
+- Etapa 3 (Confirmacao): Revisao dos dados com mascaramento de privacidade e
+  aviso LGPD.
+- Mascaramento visual no painel do cidadao:
+  * CPF exibido como ***.456.789-**
+  * Cartao SUS exibido como *** **** **** 9012
+
+4.3. Portal do Cidadao (CitizenPortal)
+- Visao geral com resumo de consultas ativas e documentos emitidos.
+- Agendamento em 6 passos: escolha da especialidade, selecao do profissional,
+  data, horario, motivo/sintomas e confirmacao do WhatsApp de destino.
+- Aba "Meus Agendamentos" com acesso a Sala de Espera Virtual e Teleconsulta.
+- Aba "Documentos" com visualizacao de receitas, atestados e guias
+  demonstrativas (DocumentModal) contendo codigo de autenticacao digital.
+
+4.4. Teleconsulta Real em Video e Audio (WaitingRoom e TeleconsultaRoom)
+- Sala de Espera Virtual (WaitingRoom): permite ao paciente testar camera e
+  microfone antes de entrar no atendimento.
+- Comunicacao em Tempo Real: implementada via WebRTC peer-to-peer com
+  sinalizacao por WebSockets no servidor Express e servidores STUN, contando
+  tambem com alternancia para motor Jitsi Meet.
+- Recursos de Mobile: botao de troca entre camera frontal e traseira no celular,
+  ativacao/desativacao de audio e video, e chat de texto sincronizado na sala.
+- Cronometro Regulamentar de 10 Minutos: controlado e sincronizado pelo servidor
+  entre medico e paciente, com alerta visual e opcao de extensao clinica de
+  +5 minutos mediante justificativa obrigatoria registrada em auditoria.
+
+4.5. Assistente Virtual Inteligente — SUS ANA (SusAnaChat e susAnaService)
+- Comportamento conversacional contextual utilizando o Google Gemini com
+  historico multi-turnos (memoria logica dos ultimos turnos da conversa).
+- Compreende relatos informais, erros de digitacao e associacao de novos
+  sintomas ao longo do dialogo (sem repetir saudacoes institucionais apos o
+  primeiro turno).
+- Guardrails clinicos e de seguranca:
+  * Interceptacao imediata de sinais de alerta/emergencia (dor no peito, falta
+    de ar intensa, sinais de AVC, desmaios), orientando acionar o SAMU 192 ou
+    procurar a UPA mais proxima.
+  * Nunca realiza diagnostico definitivo nem prescreve medicamentos.
+
+4.6. Portal da Coordenacao / Medico (AdminPortal e DoctorAgenda)
+- Agenda medica com metricas em tempo real (confirmadas, em andamento,
+  concluidas, aguardando, ausentes e canceladas).
+- Gestao de status de agendamentos e corpo clinico.
+- Aba de Automacoes com historico de webhooks disparados e simulador de testes.
+- Painel de diagnostico e conexao do banco Supabase.
+
+4.7. Automacao de Confirmacao via WhatsApp (n8n + Evolution API)
+Fluxo completo implementado em producao:
+1) Paciente conclui o agendamento de teleconsulta no Portal do Cidadao.
+2) O registro e gravado na tabela public.appointments do Supabase com o nome,
+   e-mail e WhatsApp reais do paciente.
+3) O backend (server.ts) envia automaticamente um POST seguro para o webhook
+   de producao do n8n (https://n8n.pointcontrol.com.br/webhook/sus-conect-agendamento).
+4) O workflow no n8n normaliza o numero com DDI 55, formata a data para
+   DD/MM/AAAA e monta a mensagem de confirmacao contendo:
+   - Nome do paciente
+   - Especialidade e nome do medico(a)
+   - Data e horario da teleconsulta
+   - Instrucao discreta no rodape para acesso antecipado a Sala de Espera
+5) A Evolution API (instancia conectada) dispara a mensagem diretamente no
+   WhatsApp do paciente, e o resultado e registrado na tabela webhook_logs com
+   telefone mascarado (ex: ****-1274).
+
+
+5. ESTRUTURA DE BANCO DE DADOS E SEGURANCA (SUPABASE & LGPD)
+--------------------------------------------------------------------------------
+Banco de dados relacional em PostgreSQL (supabase_schema.sql) com 6 tabelas:
+1) public.profiles — perfis vinculados ao auth.users (inclui CPF, CNS e endereco)
+2) public.specialties — 12 areas de atendimento
+3) public.professionals — 90 profissionais credenciados
+4) public.appointments — agendamentos e sessoes de teleconsulta
+5) public.demonstrative_documents — receitas, atestados e orientacoes
+6) public.webhook_logs — trilha de auditoria das automacoes
+
+Seguranca aplicada e auditada:
+- Row Level Security (RLS) habilitado em public.profiles: cada paciente consulta
+  e atualiza apenas o proprio perfil (auth.uid() = id). Usuarios anonimos sao
+  bloqueados.
+- Funcao auxiliar public.is_admin() com SECURITY DEFINER e search_path restrito
+  (public, pg_temp), eliminando risco de recursao infinita em politicas RLS.
+- Blindagem de papeis (Anti-Escalonamento de Privilegios):
+  * A trigger handle_new_user() forca todo novo cadastro a receber o papel
+    'citizen', ignorando tentativas de envio de role 'admin' ou 'doctor'.
+  * A trigger protect_profile_role() bloqueia qualquer alteracao indevida do
+    campo role em atualizacoes de perfil.
+- Protecao de segredos: nenhuma chave privada (service_role, GEMINI_API_KEY ou
+  tokens de webhook) e exposta no frontend. Todas as chamadas sensiveis passam
+  pelo servidor Node/Express.
+- Privacidade LGPD: CPF, Cartao SUS e endereco completo nunca sao enviados para
+  a IA (Gemini/SUS ANA), nao aparecem em logs e sao mascarados na interface.
+
+
+6. ROTEIRO SUGERIDO PARA APRESENTACAO EM SALA (5 A 7 MINUTOS)
+--------------------------------------------------------------------------------
+1. Introducao (1 min):
+   - Apresentar o problema de acesso e o conceito do SUS CONECT ("A tecnologia
+     aproxima. O cuidado conecta."), destacando o foco academico na Formacao
+     Geracao Tech 4.0 e a interface mobile-first.
+2. Demonstracao de Cadastro e Privacidade (1 min):
+   - Mostrar o cadastro em 3 etapas com validacao de CPF/Cartao SUS, busca
+     automatica de CEP (ViaCEP) e mascaramento LGPD no perfil.
+3. Demonstracao da SUS ANA com IA (1 min):
+   - Enviar duas mensagens seguidas relatando sintomas diferentes para mostrar a
+     memoria de contexto do Google Gemini e os alertas de seguranca (SAMU 192).
+4. Agendamento + WhatsApp Automatico (1,5 min):
+   - Realizar um agendamento no Portal do Cidadao e mostrar a mensagem de
+     confirmacao chegando em tempo real no WhatsApp via n8n + Evolution API,
+     alem do registro salvo no Supabase.
+5. Teleconsulta Real em Video (1,5 min):
+   - Abrir a Sala de Espera Virtual, entrar na chamada WebRTC, mostrar os
+     controles de camera/microfone, chat e o cronometro de 10 minutos
+     sincronizado entre medico e paciente.
+6. Encerramento Tecnico (30s):
+   - Destacar a seguranca (RLS no Supabase, triggers anti-escalonamento de
+     privilegios, chaves protegidas no backend) e abrir para perguntas.
+
+================================================================================
+Fim do Relatorio — SUS CONECT (Formacao Geracao Tech 4.0)
+================================================================================

@@ -7,8 +7,10 @@ import { HomeView } from './views/HomeView.tsx';
 import { CitizenPortal } from './views/CitizenPortal.tsx';
 import { AdminPortal } from './views/AdminPortal.tsx';
 import { SusAnaChat, SusAnaChatFloatingButton } from './components/SusAnaChat.tsx';
+import { MobileBottomNav } from './components/MobileBottomNav.tsx';
 import { Specialty } from './types/index.ts';
 import { api } from './services/api.ts';
+import { SupabaseConnectionModal } from './components/SupabaseConnectionModal.tsx';
 
 const MainApp: React.FC = () => {
   const { user, isAuthenticated, openAuthModal } = useAuth();
@@ -16,6 +18,7 @@ const MainApp: React.FC = () => {
   const [specialties, setSpecialties] = useState<Specialty[]>([]);
   const [initialBookingSpecialtyId, setInitialBookingSpecialtyId] = useState<string | null>(null);
   const [isAnaFloatingOpen, setIsAnaFloatingOpen] = useState(false);
+  const [isSupabaseModalOpen, setIsSupabaseModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchSpecialties = async () => {
@@ -46,7 +49,6 @@ const MainApp: React.FC = () => {
     }
   };
 
-  // If user changes and is admin, stay on admin if chosen, or citizen
   const handleNavigate = (view: 'home' | 'citizen' | 'admin') => {
     if (view === 'admin' && user?.role !== 'admin') {
       alert('Acesso restrito à Coordenação Geral (Administrador). Utilize o botão "Demo Admin" no menu para demonstração acadêmica.');
@@ -60,15 +62,27 @@ const MainApp: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleScrollToSpecialties = () => {
+    if (currentView !== 'home') {
+      setCurrentView('home');
+      setTimeout(() => {
+        document.getElementById('areas-atendimento')?.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    } else {
+      document.getElementById('areas-atendimento')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#F5F7FA] text-slate-800">
+    <div className="min-h-screen flex flex-col bg-[#F5F7FA] text-slate-800 antialiased selection:bg-[#E6F2FF] selection:text-[#1E6FB8]">
       <Header
         currentView={currentView}
         onNavigate={handleNavigate}
         onOpenAnaChat={() => setIsAnaFloatingOpen(true)}
       />
 
-      <main className="flex-1">
+      {/* Main viewport area with bottom padding on mobile for the fixed thumb bar */}
+      <main className="flex-1 pb-20 md:pb-0">
         {currentView === 'home' && (
           <HomeView
             specialties={specialties}
@@ -86,7 +100,10 @@ const MainApp: React.FC = () => {
         )}
 
         {currentView === 'admin' && (
-          <AdminPortal specialties={specialties} />
+          <AdminPortal
+            specialties={specialties}
+            onOpenSupabaseModal={() => setIsSupabaseModalOpen(true)}
+          />
         )}
       </main>
 
@@ -94,6 +111,12 @@ const MainApp: React.FC = () => {
 
       {/* Authentication Modal */}
       <AuthModal />
+
+      {/* Supabase Connection & Diagnostics Modal */}
+      <SupabaseConnectionModal
+        isOpen={isSupabaseModalOpen}
+        onClose={() => setIsSupabaseModalOpen(false)}
+      />
 
       {/* Floating AI Assistant SUS ANA */}
       <SusAnaChatFloatingButton
@@ -109,6 +132,15 @@ const MainApp: React.FC = () => {
           setIsAnaFloatingOpen(false);
           handleNavigateToBooking();
         }}
+      />
+
+      {/* Mobile Bottom Thumb Navigation (Pattern 1) */}
+      <MobileBottomNav
+        currentView={currentView}
+        onNavigate={handleNavigate}
+        onOpenBooking={handleNavigateToBooking}
+        onOpenAna={() => setIsAnaFloatingOpen(true)}
+        onOpenSpecialties={handleScrollToSpecialties}
       />
     </div>
   );
